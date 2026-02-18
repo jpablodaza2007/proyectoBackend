@@ -1,0 +1,9 @@
+<h2>📘 Nuevo Libro</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input name="titulo" placeholder="Título" required><br>
+    <input name="autor" placeholder="Autor" required><br>
+    <input type="number" name="anio" placeholder="Año" required><br>
+    <button type="submit">Guardar</button>
+</form>

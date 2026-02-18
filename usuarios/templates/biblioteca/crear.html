@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Libro</title>
+</head>
+<body>
+
+<h1>Agregar Libro</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="titulo" placeholder="Título" required><br><br>
+    <input type="text" name="autor" placeholder="Autor" required><br><br>
+    <input type="hidden" name="uid" value="{{ request.session.uid }}">
+    <button type="submit">Guardar</button>
+</form>
+
+<br>
+<a href="{% url 'listar_libros' %}">⬅ Volver</a>
+
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+</body>
+</html>

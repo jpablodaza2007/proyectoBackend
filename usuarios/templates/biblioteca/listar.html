@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biblioteca</title>
+</head>
+<body>
+
+<h1>📚 Biblioteca</h1>
+
+<a href="{% url 'crear_libro' %}">➕ Agregar libro</a> |
+<a href="{% url 'dashboard' %}">⬅ Volver</a>
+
+<hr>
+
+{% if libros %}
+    <ul>
+        {% for libro in libros %}
+            <li>
+                <strong>{{ libro.titulo }}</strong><br>
+                Autor: {{ libro.autor }}<br><br>
+
+                <a href="{% url 'editar_libro' libro.id %}">✏ Editar</a> |
+                <a href="{% url 'eliminar_libro' libro.id %}">🗑 Eliminar</a>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay libros registrados</p>
+{% endif %}
+
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+</body>
+</html>
