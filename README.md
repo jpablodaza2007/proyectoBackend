@@ -67,7 +67,7 @@ usuarios como carpeta de aplicación
 
 --
 
-requeriments como archivo de librerias
+requeriments como archivo de dependencias
 
 ---
 
