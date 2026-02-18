@@ -1,37 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Biblioteca</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f4f8;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #333;
+        }
+
+        .acciones-superiores {
+            margin: 15px 0;
+        }
+
+        .acciones-superiores a {
+            text-decoration: none;
+            color: #007bff;
+            margin: 0 5px;
+        }
+
+        .acciones-superiores a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #ffffff;
+            width: 350px;
+            margin: 15px auto;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        li strong {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .acciones a {
+            text-decoration: none;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .editar {
+            color: #2196F3;
+        }
+
+        .eliminar {
+            color: #e53935;
+        }
+
+        .acciones a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            color: green;
+        }
+    </style>
+
 </head>
 <body>
 
-<h1>📚 Biblioteca</h1>
+    <h1>📚 Biblioteca</h1>
 
-<a href="{% url 'crear_libro' %}">➕ Agregar libro</a> |
-<a href="{% url 'dashboard' %}">⬅ Volver</a>
+    <div class="acciones-superiores">
+        <a href="{% url 'crear_libro' %}">➕ Agregar libro</a> |
+        <a href="{% url 'dashboard' %}">⬅ Volver</a>
+    </div>
 
-<hr>
+    {% if libros %}
+        <ul>
+            {% for libro in libros %}
+                <li>
+                    <strong>{{ libro.titulo }}</strong><br>
+                    Autor: {{ libro.autor }}<br><br>
 
-{% if libros %}
-    <ul>
-        {% for libro in libros %}
-            <li>
-                <strong>{{ libro.titulo }}</strong><br>
-                Autor: {{ libro.autor }}<br><br>
+                    <div class="acciones">
+                        <a href="{% url 'editar_libro' libro.id %}" class="editar">✏ Editar</a>
+                        <a href="{% url 'eliminar_libro' libro.id %}" class="eliminar">🗑 Eliminar</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay libros registrados</p>
+    {% endif %}
 
-                <a href="{% url 'editar_libro' libro.id %}">✏ Editar</a> |
-                <a href="{% url 'eliminar_libro' libro.id %}">🗑 Eliminar</a>
-            </li>
-            <hr>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No hay libros registrados</p>
-{% endif %}
-
-{% for message in messages %}
-    <p>{{ message }}</p>
-{% endfor %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
 
 </body>
 </html>

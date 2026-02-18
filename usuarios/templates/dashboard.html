@@ -1,24 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f4f8;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #333;
+        }
+
+        .card {
+            background: #ffffff;
+            width: 350px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        .card p {
+            margin: 10px 0;
+            color: #444;
+        }
+
+        .acciones {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .acciones a {
+            display: inline-block;
+            margin: 8px 5px;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .biblioteca {
+            background-color: #4CAF50;
+        }
+
+        .biblioteca:hover {
+            background-color: #45a049;
+        }
+
+        .logout {
+            background-color: #e53935;
+        }
+
+        .logout:hover {
+            background-color: #c62828;
+        }
+
+        .mensaje {
+            color: green;
+            margin-top: 15px;
+        }
+    </style>
+
 </head>
 <body>
 
-<h1>Dashboard</h1>
+    <h1>Dashboard</h1>
 
-<p><strong>Email:</strong> {{ datos.email }}</p>
-<p><strong>Rol:</strong> {{ datos.rol }}</p>
+    <div class="card">
+        <p><strong>Email:</strong> {{ datos.email }}</p>
+        <p><strong>Rol:</strong> {{ datos.rol }}</p>
 
-<hr>
+        <div class="acciones">
+            <a href="{% url 'listar_libros' %}" class="biblioteca">📚 Ir a Biblioteca</a>
+            <a href="{% url 'logout' %}" class="logout">🚪 Cerrar sesión</a>
+        </div>
+    </div>
 
-<a href="{% url 'listar_libros' %}">📚 Ir a Biblioteca</a>
-
-<a href="{% url 'logout' %}">🚪 Cerrar sesión</a>
-
-{% for message in messages %}
-    <p>{{ message }}</p>
-{% endfor %}
+    {% for message in messages %}
+        <p class="mensaje">{{ message }}</p>
+    {% endfor %}
 
 </body>
 </html>

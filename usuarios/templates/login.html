@@ -1,27 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f4f8;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 60px;
+            color: #333;
+        }
+
+        form {
+            background: #ffffff;
+            width: 320px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2196F3;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1976D2;
+        }
+
+        p {
+            margin-top: 15px;
+            color: #444;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .mensaje {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+
 </head>
 <body>
 
-<h1>Iniciar Sesión</h1>
+    <h1>Iniciar Sesión</h1>
 
-<form method="post">
-    {% csrf_token %}
-    <input type="email" name="email" placeholder="Correo" required><br><br>
-    <input type="password" name="password" placeholder="Contraseña" required><br><br>
-    <button type="submit">Entrar</button>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Correo" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
+    </form>
 
-<p>
-    ¿No tienes cuenta?
-    <a href="{% url 'registro' %}">Regístrate</a>
-</p>
+    <p>
+        ¿No tienes cuenta?
+        <a href="{% url 'registro' %}">Regístrate</a>
+    </p>
 
-{% for message in messages %}
-    <p>{{ message }}</p>
-{% endfor %}
+    {% for message in messages %}
+        <p class="mensaje">{{ message }}</p>
+    {% endfor %}
 
 </body>
 </html>

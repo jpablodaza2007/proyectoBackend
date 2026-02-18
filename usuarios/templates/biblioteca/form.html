@@ -1,9 +1,74 @@
-<h2>📘 Nuevo Libro</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Libro</title>
 
-<form method="post">
-    {% csrf_token %}
-    <input name="titulo" placeholder="Título" required><br>
-    <input name="autor" placeholder="Autor" required><br>
-    <input type="number" name="anio" placeholder="Año" required><br>
-    <button type="submit">Guardar</button>
-</form>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f4f8;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 40px;
+            color: #333;
+        }
+
+        form {
+            background: #ffffff;
+            width: 320px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+<body>
+
+    <h2>📘 Nuevo Libro</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="titulo" placeholder="Título" required>
+        <input type="text" name="autor" placeholder="Autor" required>
+        <input type="number" name="anio" placeholder="Año" required>
+        <button type="submit">Guardar</button>
+    </form>
+
+</body>
+</html>
