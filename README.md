@@ -1,4 +1,4 @@
-📘 README.md — Sistema de Gestión de Biblioteca con Django + Firebase
+Sistema de Gestión de Biblioteca con Django + Firebase
 📚 Sistema de Gestión de Biblioteca
 
 Aplicación web desarrollada con Django integrada con Firebase como Backend as a Service (BaaS).
