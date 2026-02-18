@@ -54,6 +54,21 @@ proyectoBackend/
 └── db.sqlite3
 </pre>
 
+
+## proyectoBackend como carpeta principal
+
+--
+
+biblioteca como carpeta de proyecto
+
+--
+
+usuarios como carpeta de aplicación
+
+--
+
+requeriments como archivo de librerias
+
 ---
 
 ## 📊 Modelo de Datos (Firestore)
