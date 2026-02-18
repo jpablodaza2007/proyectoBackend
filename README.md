@@ -193,6 +193,7 @@ Colaboradores
 
 Joseph Sebastian Cristiano Beltran
 Jhostyn Nicolas Cristiano Beltran
+Juan Manuel Baracaldo
 
 Programa ADSO – Análisis y Desarrollo de Software
 
