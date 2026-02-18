@@ -1,44 +1,42 @@
-Sistema de Gestión de Biblioteca con Django + Firebase
-📚 Sistema de Gestión de Biblioteca
+# 📚 Sistema de Gestión de Biblioteca con Django + Firebase
 
-Aplicación web desarrollada con Django integrada con Firebase como Backend as a Service (BaaS).
+Aplicación web desarrollada con **Django** integrada con **Firebase** como Backend as a Service (BaaS).
+
+---
+
+## 📝 Descripción
 
 El sistema permite:
 
-Registro e inicio de sesión con Firebase Authentication
+- Registro e inicio de sesión con Firebase Authentication
+- Gestión de perfil de usuario en Firestore
+- CRUD completo de libros
+- Control de acceso por usuario (multiusuario)
+- Seguridad basada en UID
 
-Gestión de perfil de usuario en Firestore
+---
 
-CRUD completo de libros
+## 🏗️ Arquitectura del Sistema
 
-Control de acceso por usuario (multiusuario)
+### 🔹 Backend
+- Templates HTML
+- Manejo de sesiones
+- Decoradores personalizados de seguridad
 
-Seguridad basada en UID
+### 🔹 Autenticación
+- Registro → Firebase Admin SDK
+- Inicio de sesión → Firebase REST API (identitytoolkit)
+- Sesión almacenada en Django (uid, email, idToken)
 
-🏗️ Arquitectura del Sistema
-🔹 Backend
+### 🔹 Base de Datos
+- Firestore (NoSQL)
+- SQLite solo para uso interno de Django (admin, sesiones)
 
-Templates HTML
+---
 
-Manejo de sesiones
+## 📂 Estructura del Proyecto
 
-Decoradores personalizados de seguridad
-
-🔹 Autenticación
-
-Registro → Firebase Admin SDK
-
-Inicio de sesión → Firebase REST API (identitytoolkit)
-
-Sesión almacenada en Django (uid, email, idToken)
-
-🔹 Base de Datos
-
-Firestore (NoSQL)
-
-SQLite solo para uso interno de Django (admin, sesiones)
-
-📂 Estructura del Proyecto
+<pre>
 proyectoBackend/
 │
 ├── biblioteca/
@@ -54,17 +52,24 @@ proyectoBackend/
 ├── manage.py
 ├── requirements.txt
 └── db.sqlite3
+</pre>
 
-📊 Modelo de Datos (Firestore)
-📁 Colección: perfiles
+---
+
+## 📊 Modelo de Datos (Firestore)
+
+### Colección: perfiles
+<pre><code class="json">
 {
   "email": "usuario@email.com",
   "uid": "UID_GENERADO",
   "rol": "usuario",
   "fecha_registro": "timestamp"
 }
+</code></pre>
 
-📁 Colección: libros
+### Colección: libros
+<pre><code class="json">
 {
   "titulo": "Cien Años de Soledad",
   "autor": "Gabriel García Márquez",
@@ -74,134 +79,132 @@ proyectoBackend/
   "fecha_creacion": "timestamp",
   "fecha_actualizacion": "timestamp"
 }
+</code></pre>
 
-🔐 Seguridad Implementada
+---
 
-Decorador personalizado login_required_firebase
+## 🔐 Seguridad Implementada
 
-Validación de propietario antes de editar libro
+- Decorador personalizado `login_required_firebase`
+- Validación de propietario antes de editar libro
+- UID asociado a cada libro
+- Variables de entorno para claves sensibles
+- SDK inicializado dinámicamente con ruta absoluta
 
-UID asociado a cada libro
+---
 
-Variables de entorno para claves sensibles
+## 🚀 Instalación y Configuración
 
-SDK inicializado dinámicamente con ruta absoluta
-
-🚀 Instalación y Configuración
-1️⃣ Clonar el repositorio
+### 1️⃣ Clonar el repositorio
+<pre><code class="bash">
 git clone https://github.com/jpablodaza2007/proyectoBackend.git
 cd proyectoBackend
+</code></pre>
 
-2️⃣ Crear entorno virtual
-Windows:
+### 2️⃣ Crear entorno virtual
+
+**Windows:**
+<pre><code class="bash">
 python -m venv venv
 venv\Scripts\activate
+</code></pre>
 
-Linux / Mac:
+**Linux / Mac:**
+<pre><code class="bash">
 python3 -m venv venv
 source venv/bin/activate
+</code></pre>
 
-3️⃣ Instalar dependencias
+### 3️⃣ Instalar dependencias
+<pre><code class="bash">
 pip install -r requirements.txt
+</code></pre>
 
-4️⃣ Configuración de Firebase
-🔹 Paso 1: Crear proyecto en Firebase
+### 4️⃣ Configuración de Firebase
+<pre>
+1. Crear proyecto en la consola de Firebase
+2. Habilitar Authentication (Email/Password) y Firestore Database
+3. Descargar credenciales:
+   - Project Settings → Service Accounts → Generate new private key
+   - Guardar archivo JSON en biblioteca/serviceAccountKey.json
+</pre>
 
-Entra a la consola de Firebase
-Crea un proyecto nuevo.
-
-🔹 Paso 2: Habilitar:
-
-Authentication (Email/Password)
-
-Firestore Database
-
-🔹 Paso 3: Descargar credenciales
-
-Ir a:
-Project Settings → Service Accounts → Generate new private key
-
-Guardar el archivo JSON dentro de la carpeta biblioteca/
-
-Ejemplo:
-
-biblioteca/serviceAccountKey.json
-
-5️⃣ Ejecutar migraciones
+### 5️⃣ Ejecutar migraciones
+<pre><code class="bash">
 python manage.py migrate
+</code></pre>
 
-6️⃣ Ejecutar servidor
+### 6️⃣ Ejecutar servidor
+<pre><code class="bash">
 python manage.py runserver
+</code></pre>
 
+Abrir en navegador: `http://127.0.0.1:8000/`
 
-Abrir en navegador:
+---
 
-http://127.0.0.1:8000/
+## 📌 Endpoints Principales
 
-📌 Endpoints Principales
-🔐 Autenticación
+### Autenticación
 
-/ → Login
+| Ruta           | Descripción      |
+|----------------|----------------|
+| `/`            | Login           |
+| `/login/`      | Login           |
+| `/registro/`   | Registro        |
+| `/logout/`     | Cerrar sesión   |
+| `/dashboard/`  | Panel de usuario|
 
-/login/
+### Biblioteca
 
-/registro/
+| Ruta                            | Descripción     |
+|---------------------------------|----------------|
+| `/biblioteca/`                  | Listar libros   |
+| `/biblioteca/crear/`            | Crear libro     |
+| `/biblioteca/editar/<libro_id>/`   | Editar libro   |
+| `/biblioteca/eliminar/<libro_id>/` | Eliminar libro |
 
-/logout/
+---
 
-/dashboard/
+## 🛠️ Dependencias Principales
 
-📚 Biblioteca
-
-/biblioteca/
-
-/biblioteca/crear/
-
-/biblioteca/editar/<libro_id>/
-
-/biblioteca/eliminar/<libro_id>/
-
-🛠️ Dependencias Principales
-
+<pre><code class="text">
 Django
-
 firebase-admin
-
 python-dotenv
-
 requests
+</code></pre>
 
-⚠️ Configuración para Producción
+---
 
-Se recomienda:
+## ⚠️ Configuración para Producción
 
-Mover SECRET_KEY a variable de entorno
+- Mover `SECRET_KEY` a variable de entorno
+- Establecer `DEBUG=False`
+- Configurar `ALLOWED_HOSTS`
+- Usar base de datos robusta (PostgreSQL)
+- Configurar reglas de seguridad en Firestore
 
-Establecer DEBUG=False
+---
 
-Configurar ALLOWED_HOSTS
+## 👨‍💻 Autor y Colaboradores
 
-Usar base de datos robusta (PostgreSQL)
+**Autor:** Juan Pablo Daza Alcazar
 
-Configurar reglas de seguridad en Firestore
-
-👨‍💻 Autor
-
-Juan Pablo Daza Alcazar
-
-Colaboradores
-
-Joseph Sebastian Cristiano Beltran
-Jhostyn Nicolas Cristiano Beltran
-Juan Manuel Baracaldo
+**Colaboradores:**
+- Joseph Sebastian Cristiano Beltran
+- Jhostyn Nicolas Cristiano Beltran
+- Juan Manuel Baracaldo
 
 Programa ADSO – Análisis y Desarrollo de Software
 
-🎯 Características Técnicas Destacadas
+---
 
-✔ Integración real Django + Firebase
-✔ Autenticación híbrida (Admin SDK + REST API)
-✔ Multiusuario con separación por UID
-✔ Arquitectura cliente-servidor
-✔ Control de acceso personalizado
+## 🎯 Características Técnicas Destacadas
+
+✔ Integración real Django + Firebase  
+✔ Autenticación híbrida (Admin SDK + REST API)  
+✔ Multiusuario con separación por UID  
+✔ Arquitectura cliente-servidor  
+✔ Control de acceso personalizado  
 ✔ Modelo NoSQL documentado
