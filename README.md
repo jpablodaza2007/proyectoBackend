@@ -18,8 +18,6 @@ Seguridad basada en UID
 🏗️ Arquitectura del Sistema
 🔹 Backend
 
-Django 6.0.2
-
 Templates HTML
 
 Manejo de sesiones
