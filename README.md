@@ -223,3 +223,9 @@ Programa ADSO – Análisis y Desarrollo de Software
 ✔ Arquitectura cliente-servidor  
 ✔ Control de acceso personalizado  
 ✔ Modelo NoSQL documentado
+
+## ⌚ Cronograma
+
+<img width="622" height="103" alt="image" src="https://github.com/user-attachments/assets/4c56cfec-fd0b-43c1-843b-0608d77ebd37" />
+<img width="622" height="103" alt="image" src="https://github.com/user-attachments/assets/4c56cfec-fd0b-43c1-843b-0608d77ebd37" />
+
